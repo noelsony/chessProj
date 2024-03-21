@@ -65,7 +65,7 @@ class board
                     }
                 }
             }
-            cout<<"\n";
+            cout<<"\n\n";
         }
     }
 }setBoard;
@@ -86,14 +86,14 @@ class piece
         type=t;
         chessBoard[rank-1][file-1]=type;
     }
-    /*bool inRange(int r, int f)
+    
+/*     bool inRange(int r, int f)
     {
-
+        return false;
     }
-    void move(int a,int b)
-    {
-
-    }
+ */
+  
+    /*
     void capture(int a, int b)
     {
 
@@ -228,6 +228,78 @@ class rook : public piece
         return false;        
     }
 
+    void move(char mf, int mr)
+    {       
+        int t=(int)(mf-'a'+1);
+        if(inRange(mr-1,t-1)==true)
+        {
+            chessBoard[rank-1][file-1]=0;
+            rank=mr;
+            file=(int)(mf-'a'+1);
+            chessBoard[rank-1][file-1]=type;
+            cout<<"Moved to "<<mf<<mr<<"\n\n";
+            setBoard.displayBoard();
+        }
+        else
+        {
+            cout<<"Not available\n\n";
+            setBoard.displayBoard();
+        }
+    }
+
+};
+
+class knight : public piece
+{
+    public:
+    knight(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+};
+
+class pawn : public piece
+{
+    public:
+    pawn(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+    bool inRange(int xr, int xf)
+    {
+        int curR=rank-1, curF=file-1;
+        if(curR+1<8 && setType=='w')
+        {   
+            if(curR+1==xr && curF==xf && chessBoard[curR+1][curF]==0)
+            {
+                return true;
+            }
+            if(curR+1==xr && curF==xf && chessBoard[curR+1][curF]>=1 && chessBoard[curR+1][curF]<=32)
+            {
+                return false;
+            }
+
+            if(setType=='w' && ((chessBoard[curR+1][curF+1]>=17 && chessBoard[curR+1][curF+1]<=32 && curR+1<8 && curF+1<8 && curR+1==xr && curF+1==xf)||(chessBoard[curR+1][curF-1]>=17 && chessBoard[curR+1][curF-1]<=32 && curR+1<8 && curF-1>=0 && curR+1==xr && curF-1==xf)))
+            {   
+                return true;
+            }
+        }
+        else if(curR-1>=0 && setType=='b')
+        {   
+            if(curR-1==xr && curF==xf && chessBoard[curR-1][curF]==0)
+            {
+                return true;
+            }
+            if(curR-1==xr && curF==xf && chessBoard[curR-1][curF]>=1 && chessBoard[curR-1][curF]<=32)
+            {
+                return false;
+            }
+
+            if(setType=='b' && ((chessBoard[curR-1][curF+1]>=1 && chessBoard[curR-1][curF+1]<=16 && curR-1>=0 && curF+1<8 && curR-1==xr && curF+1==xf)||(chessBoard[curR-1][curF-1]>=1 && chessBoard[curR-1][curF-1]<=16 && curR-1>=0 && curF-1>=0 && curR-1==xr && curF-1==xf)))
+            {   
+                return true;
+            }
+        }
+        
+        return false;
+
+    }
 
     void move(char mf, int mr)
     {       
@@ -249,34 +321,23 @@ class rook : public piece
     }
 };
 
-class knight : public piece
-{
-    public:
-    knight(char f, int r, char s, int t): piece(f,r,s,t)
-    {}
-};
-
-class pawn : public piece
-{
-    public:
-    pawn(char f, int r, char s, int t): piece(f,r,s,t)
-    {}
-};
-
 king Kw('e',1,'w',1), Kb('e',8,'b',17);
 queen Qw('d',1,'w',2), Qb('d',8,'b',18);
 rook R1w('a',1,'w',3), R2w('h',1,'w',4), R1b('a',8,'b',19), R2b('h',8,'b',20);
 bishop B1w('c',1,'w',5), B2w('f',1,'w',6), B1b('c',8,'b',21), B2b('f',8,'b',22);
 knight N1w('b',1,'w',7), N2w('g',1,'w',8), N1b('b',8,'b',23), N2b('g',8,'b',24);
-pawn /* P1w('a',2,'w',9), */P2w('b',2,'w',10), P3w('c',2,'w',11), P4w('d',2,'w',12), P5w('e',2,'w',13), P6w('f',2,'w',14), P7w('g',2,'w',15), P8w('h',2,'w',16),P1b('a',7,'b',25),P2b('b',7,'b',26), P3b('c',7,'b',27), P4b('d',7,'b',28), P5b('e',7,'b',29), P6b('f',7,'b',30), P7b('g',7,'b',31), P8b('h',7,'b',32);
+pawn P1w('a',2,'w',9),P2w('b',2,'w',10), P3w('c',2,'w',11), P4w('d',2,'w',12), P5w('e',2,'w',13), P6w('f',2,'w',14), P7w('g',2,'w',15), P8w('h',2,'w',16),P1b('a',7,'b',25),P2b('b',7,'b',26), P3b('c',7,'b',27), P4b('d',7,'b',28), P5b('e',7,'b',29), P6b('f',7,'b',30), P7b('g',7,'b',31), P8b('h',7,'b',32);
 
 int main()
 {   
     setBoard.displayBoard();
-    R1w.move('a',4);
-    R1w.move('c',3);
-    R1w.move('c',4);
-    R1w.move('c',5);
-    R1w.move('h',5);
+
+    P4w.move('d',3);
+    P4w.move('d',4);
+    P4b.move('d',6);
+    P4b.move('d',5);
+    P4w.move('d',5);
+    P4w.move('e',6);
+
     return 0;
 }
