@@ -1,0 +1,282 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int chessBoard[8][8];
+
+class board
+{
+    public: bool inCheck=false;
+    board()
+    {   
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++)
+            {
+                chessBoard[i][j]=0;
+            }
+        }
+
+    }
+    void displayBoard()
+    {
+        for(int i=7;i>=0;i--)
+        {
+            for (int j=0;j<8;j++)
+            {
+                if(chessBoard[i][j]==0)
+                    cout<<"\t";
+                else
+                {
+                  switch(chessBoard[i][j])
+                    {
+                      case 1: cout<<"Kw"<<"\t"; break;
+                      case 2: cout<<"Qw"<<"\t"; break;
+                      case 3: cout<<"R1w"<<"\t"; break;
+                      case 4: cout<<"R2w"<<"\t"; break;
+                      case 5: cout<<"B1w"<<"\t"; break;
+                      case 6: cout<<"B2w"<<"\t"; break;
+                      case 7: cout<<"N1w"<<"\t"; break;
+                      case 8: cout<<"N2w"<<"\t"; break;
+                      case 9: cout<<"p1w"<<"\t"; break;
+                      case 10: cout<<"p2w"<<"\t"; break;
+                      case 11: cout<<"p3w"<<"\t"; break;
+                      case 12: cout<<"p4w"<<"\t"; break;
+                      case 13: cout<<"p5w"<<"\t"; break;
+                      case 14: cout<<"p6w"<<"\t"; break;
+                      case 15: cout<<"p7w"<<"\t"; break;
+                      case 16: cout<<"p8w"<<"\t"; break;
+                      case 17: cout<<"Kb"<<"\t"; break;
+                      case 18: cout<<"Qb"<<"\t"; break;
+                      case 19: cout<<"R1b"<<"\t"; break;
+                      case 20: cout<<"R2b"<<"\t"; break;
+                      case 21: cout<<"B1b"<<"\t"; break;
+                      case 22: cout<<"B2b"<<"\t"; break;
+                      case 23: cout<<"N1b"<<"\t"; break;
+                      case 24: cout<<"N2b"<<"\t"; break;
+                      case 25: cout<<"p1b"<<"\t"; break;
+                      case 26: cout<<"p2b"<<"\t"; break;
+                      case 27: cout<<"p3b"<<"\t"; break;
+                      case 28: cout<<"p4b"<<"\t"; break;
+                      case 29: cout<<"p5b"<<"\t"; break;
+                      case 30: cout<<"p6b"<<"\t"; break;
+                      case 31: cout<<"p7b"<<"\t"; break;
+                      case 32: cout<<"p8b"<<"\t"; break;
+                    }
+                }
+            }
+            cout<<"\n";
+        }
+    }
+}setBoard;
+
+class piece
+{   
+    public: int type = 0; 
+            int file = 0;
+            int rank = 0;
+            char setType = 'u';
+            bool captured = false;
+
+    piece(char f, int r, char s, int t)
+    {
+        file=(int)(f-'a'+1);
+        rank=r;
+        setType=s;
+        type=t;
+        chessBoard[rank-1][file-1]=type;
+    }
+    /*bool inRange(int r, int f)
+    {
+
+    }
+    void move(int a,int b)
+    {
+
+    }
+    void capture(int a, int b)
+    {
+
+    }*/
+};
+
+class king : public piece
+{   
+    public:
+    //king();
+    king(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+};
+
+class queen : public piece
+{
+    public:
+    //queen();
+    queen(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+};
+
+class bishop : public piece
+{
+    public:
+    //bishop();
+    bishop(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+
+};
+
+class rook : public piece
+{   
+    public:
+    //rook();
+    rook(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+    bool inRange(int xr, int xf)
+    {
+        int curR=rank-1, curF=file-1;
+        while(curR+1<8 && curR<=xr)
+        {   
+            curR+=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+
+        curR=rank-1, curF=file-1;
+        while(curR-1>=0 && curR>=xr)
+        {   
+            curR-=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {    
+                break;
+            }
+        }
+
+        curR=rank-1, curF=file-1;
+        while(curF+1<8 && curF<=xf)
+        {   
+            curF+=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {   
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+
+        curR=rank-1, curF=file-1;
+        while(curF-1>=0 && curF>=xf)
+        {   
+            curF-=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+
+        return false;        
+    }
+
+
+    void move(char mf, int mr)
+    {       
+        int t=(int)(mf-'a'+1);
+        if(inRange(mr-1,t-1)==true)
+        {
+            chessBoard[rank-1][file-1]=0;
+            rank=mr;
+            file=(int)(mf-'a'+1);
+            chessBoard[rank-1][file-1]=type;
+            cout<<"Moved to "<<mf<<mr<<"\n\n";
+            setBoard.displayBoard();
+        }
+        else
+        {
+            cout<<"Not available\n\n";
+            setBoard.displayBoard();
+        }
+    }
+};
+
+class knight : public piece
+{
+    public:
+    knight(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+};
+
+class pawn : public piece
+{
+    public:
+    pawn(char f, int r, char s, int t): piece(f,r,s,t)
+    {}
+};
+
+king Kw('e',1,'w',1), Kb('e',8,'b',17);
+queen Qw('d',1,'w',2), Qb('d',8,'b',18);
+rook R1w('a',1,'w',3), R2w('h',1,'w',4), R1b('a',8,'b',19), R2b('h',8,'b',20);
+bishop B1w('c',1,'w',5), B2w('f',1,'w',6), B1b('c',8,'b',21), B2b('f',8,'b',22);
+knight N1w('b',1,'w',7), N2w('g',1,'w',8), N1b('b',8,'b',23), N2b('g',8,'b',24);
+pawn /* P1w('a',2,'w',9), */P2w('b',2,'w',10), P3w('c',2,'w',11), P4w('d',2,'w',12), P5w('e',2,'w',13), P6w('f',2,'w',14), P7w('g',2,'w',15), P8w('h',2,'w',16),P1b('a',7,'b',25),P2b('b',7,'b',26), P3b('c',7,'b',27), P4b('d',7,'b',28), P5b('e',7,'b',29), P6b('f',7,'b',30), P7b('g',7,'b',31), P8b('h',7,'b',32);
+
+int main()
+{   
+    setBoard.displayBoard();
+    R1w.move('a',4);
+    R1w.move('c',3);
+    R1w.move('c',4);
+    R1w.move('c',5);
+    R1w.move('h',5);
+    return 0;
+}
