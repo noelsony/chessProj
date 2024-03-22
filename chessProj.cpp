@@ -103,7 +103,6 @@ class piece
 class king : public piece
 {   
     public:
-    //king();
     king(char f, int r, char s, int t): piece(f,r,s,t)
     {}
 };
@@ -111,7 +110,6 @@ class king : public piece
 class queen : public piece
 {
     public:
-    //queen();
     queen(char f, int r, char s, int t): piece(f,r,s,t)
     {}
 };
@@ -119,16 +117,129 @@ class queen : public piece
 class bishop : public piece
 {
     public:
-    //bishop();
     bishop(char f, int r, char s, int t): piece(f,r,s,t)
     {}
+    bool inRange(int xr, int xf)
+    {
+        int curR=rank-1, curF=file-1;
+        while(curR+1<8 && curR<=xr && curF+1<8 && curF<=xf)
+        {   
+            curR+=1;
+            curF+=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
 
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+        curR=rank-1, curF=file-1;
+        while(curR+1<8 && curR<=xr && curF-1>=0 && curF>=xf)
+        {   
+            curR+=1;
+            curF-=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+        curR=rank-1, curF=file-1;
+        while(curR-1>=0 && curR>=xr && curF-1>=0 && curF>=xf)
+        {   
+            curR-=1;
+            curF-=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+        curR=rank-1, curF=file-1;
+        while(curR-1>=0 && curR>=xr && curF+1<8 && curF<=xf)
+        {   
+            curR-=1;
+            curF+=1;
+            if(curR==xr && curF==xf && chessBoard[curR][curF]==0)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='w' && chessBoard[curR][curF]>=17 && chessBoard[curR][curF]<=32)
+            {
+                return true;
+            }
+            if(curR==xr && curF==xf && setType=='b' && chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=16)
+            {
+                return true;
+            }
+
+            if(chessBoard[curR][curF]>=1 && chessBoard[curR][curF]<=32)
+            {
+                break;
+            }
+        }
+
+        return false;        
+    }
+
+    void move(char mf, int mr)
+    {       
+        int t=(int)(mf-'a'+1);
+        if(inRange(mr-1,t-1)==true)
+        {
+            chessBoard[rank-1][file-1]=0;
+            rank=mr;
+            file=(int)(mf-'a'+1);
+            chessBoard[rank-1][file-1]=type;
+            cout<<"Moved to "<<mf<<mr<<"\n\n";
+            setBoard.displayBoard();
+        }
+        else
+        {
+            cout<<"Not available\n\n";
+            setBoard.displayBoard();
+        }
+    }
 };
 
 class rook : public piece
 {   
     public:
-    //rook();
     rook(char f, int r, char s, int t): piece(f,r,s,t)
     {}
     bool inRange(int xr, int xf)
@@ -338,6 +449,11 @@ int main()
     P4b.move('d',5);
     P4w.move('d',5);
     P4w.move('e',6);
-
+    B1w.move('g',5);
+    B1w.move('a',5);
+    B1w.move('f',6);
+    B1w.move('h',4);
+    B1w.move('g',3);
+    B1w.move('g',5);
     return 0;
 }
