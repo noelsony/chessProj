@@ -118,6 +118,8 @@ public:
             case 32:
                 cout << "p8b"<< "\t";
                 break;
+            default:
+                break;
           }
         }
       }
@@ -175,7 +177,7 @@ class queen : public piece {
 public:
   queen(char f, int r, char s, int t) : piece(f, r, s, t) {}
 
- /*  bool inRange(int xr, int xf) {
+  bool inRange(int xr, int xf) {
     int curR = rank - 1, curF = file - 1;
     while (curR + 1 < 8 && curR <= xr && curF + 1 < 8 && curF <= xf) {
       curR += 1;
@@ -257,8 +259,47 @@ public:
       }
     }
     curR = rank - 1, curF = file - 1;
-    while (curR + 1 < 8 && curR <= xr && curF + 1 < 8 && curF <= xf) {
+    while (curR + 1 < 8 && curR <= xr) {
       curR += 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+
+      if (chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 32) {
+        break;
+      }
+    }
+
+    curR = rank - 1, curF = file - 1;
+    while (curR - 1 >= 0 && curR >= xr) {
+      curR -= 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+
+      if (chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 32) {
+        break;
+      }
+    }
+
+    curR = rank - 1, curF = file - 1;
+    while (curF + 1 < 8 && curF <= xf) {
       curF += 1;
       if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
         return true;
@@ -276,50 +317,10 @@ public:
         break;
       }
     }
-    curR = rank - 1, curF = file - 1;
-    while (curR + 1 < 8 && curR <= xr && curF - 1 >= 0 && curF >= xf) {
-      curR += 1;
-      curF -= 1;
-      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
-        return true;
-      }
-      if (curR == xr && curF == xf && setType == 'w' &&
-          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
-        return true;
-      }
-      if (curR == xr && curF == xf && setType == 'b' &&
-          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
-        return true;
-      }
 
-      if (chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 32) {
-        break;
-      }
-    }
     curR = rank - 1, curF = file - 1;
-    while (curR - 1 >= 0 && curR >= xr && curF - 1 >= 0 && curF >= xf) {
-      curR -= 1;
+    while (curF - 1 >= 0 && curF >= xf) {
       curF -= 1;
-      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
-        return true;
-      }
-      if (curR == xr && curF == xf && setType == 'w' &&
-          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
-        return true;
-      }
-      if (curR == xr && curF == xf && setType == 'b' &&
-          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
-        return true;
-      }
-
-      if (chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 32) {
-        break;
-      }
-    }
-    curR = rank - 1, curF = file - 1;
-    while (curR - 1 >= 0 && curR >= xr && curF + 1 < 8 && curF <= xf) {
-      curR -= 1;
-      curF += 1;
       if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
         return true;
       }
@@ -338,7 +339,7 @@ public:
     }
 
     return false;
-  } */
+  }
 };
 
 class bishop : public piece {
@@ -706,7 +707,13 @@ int main() {
   B1w.move('h', 4);
   B1w.move('g', 3);
   B1w.move('g', 5);
-/*   Qw.move('d',3);
-  Qb.move('d',6); */
+  Qw.move('d',3);
+  Qb.move('d',6);
+  Qb.move('c',6);
+  Qb.move('c',2);
+  Qb.move('d',3);
+  Qb.move('e',2);
+  Qb.move('f',3);
+  Qb.move('d',1);
   return 0;
 }
