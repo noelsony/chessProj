@@ -4,10 +4,10 @@ using namespace std;
 
 int chessBoard[8][8];
 void capture(int a, int b);
+bool inCheck(char c);
 
 class board {
 public:
-  bool inCheck = false;
   board() {
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
@@ -151,7 +151,7 @@ public:
   void move(char mf, int mr) {
     int t = (int)(mf - 'a' + 1);
     if(captured==false){
-        if (inRange(mr - 1, t - 1) == true) {
+      if (inRange(mr - 1, t - 1) == true) {
         chessBoard[rank - 1][file - 1] = 0;
         capture(mr - 1, t - 1);
         rank = mr;
@@ -161,7 +161,7 @@ public:
         setBoard.displayBoard();
         } else {
         cout << "Not available\n\n";
-        }
+      }
     }
     else
         cout<<"Piece already captured\n\n";
@@ -856,36 +856,22 @@ void capture(int a, int b) {
   }
 }
 
+bool inCheck(char c){
+  if(c=='w'){
+    int cr=Kw.rank-1, cf=Kw.file-1;
+    if(Kb.inRange(cr,cf)||Qb.inRange(cr,cf)||R1b.inRange(cr,cf)||R2b.inRange(cr,cf)||B1b.inRange(cr,cf)||B2b.inRange(cr,cf)||N1b.inRange(cr,cf)||N2b.inRange(cr,cf)||P1b.inRange(cr,cf)||P2b.inRange(cr,cf)||P3b.inRange(cr,cf)||P4b.inRange(cr,cf)||P5b.inRange(cr,cf)||P6b.inRange(cr,cf)||P7b.inRange(cr,cf)||P8b.inRange(cr,cf))
+      return true;
+  }
+  if(c=='b'){
+    int cr=Kb.rank-1, cf=Kb.file-1;
+    if(Kw.inRange(cr,cf)||Qw.inRange(cr,cf)||R1w.inRange(cr,cf)||R2w.inRange(cr,cf)||B1w.inRange(cr,cf)||B2w.inRange(cr,cf)||N1w.inRange(cr,cf)||N2w.inRange(cr,cf)||P1w.inRange(cr,cf)||P2w.inRange(cr,cf)||P3w.inRange(cr,cf)||P4w.inRange(cr,cf)||P5w.inRange(cr,cf)||P6w.inRange(cr,cf)||P7w.inRange(cr,cf)||P8w.inRange(cr,cf))
+      return true;
+  }
+  return false;
+}
+
 int main() {
   setBoard.displayBoard();
 
-  P4w.move('d', 3);
-  P4w.move('d', 4);
-  P4b.move('d', 6);
-  P4b.move('d', 5);
-  P4w.move('d', 5);
-  P4w.move('e', 6);
-  B1w.move('g', 5);
-  B1w.move('a', 5);
-  B1w.move('f', 6);
-  P7b.move('f', 6);
-  B1w.move('h', 4);
-  B1w.move('g', 3);
-  B1w.move('g', 5);
-  Qw.move('d',3);
-  Qb.move('d',6);
-  Qb.move('c',6);
-  Qb.move('c',2);
-  Qb.move('d',3);
-  Qb.move('e',2);
-  Qb.move('f',3);
-  Qb.move('d',1);
-  N1b.move('a',6);
-  N1b.move('c',7);
-  N1b.move('c',5);
-  N1b.move('b',3);
-  N1b.move('c',1);
-  N2w.move('e',2);
-  N2w.move('c',1);
   return 0;
 }
