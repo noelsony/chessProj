@@ -522,7 +522,140 @@ public:
 class knight : public piece {
 public:
   knight(char f, int r, char s, int t) : piece(f, r, s, t) {}
-};
+
+  bool inRange(int xr, int xf) {
+    int curR = rank - 1, curF = file - 1;
+    if (curR + 2 < 8 && curR <= xr && curF + 1 < 8 && curF <= xf) {
+      curR += 2;
+      curF += 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+      }
+    curR = rank - 1, curF = file - 1;
+    if (curR + 2 < 8 && curR <= xr && curF - 1 >= 0 && curF >= xf) {
+      curR += 2;
+      curF -= 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+    curR = rank - 1, curF = file - 1;
+    if (curR - 2 >= 0 && curR >= xr && curF - 1 >= 0 && curF >= xf) {
+      curR -= 2;
+      curF -= 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+    curR = rank - 1, curF = file - 1;
+    if (curR - 2 >= 0 && curR >= xr && curF + 1 < 8 && curF <= xf) {
+      curR -= 2;
+      curF += 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+    curR = rank - 1, curF = file - 1;
+    if (curF + 2 < 8 && curF <= xf && curR +1 < 8 && curR <= xr) {
+      curF += 2;
+      curR += 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+      }
+      curR = rank - 1, curF = file - 1;
+    if (curF + 2 < 8 && curF <= xf && curR - 1 >= 0 && curR >= xr) {
+      curF += 2;
+      curR -= 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+    curR = rank - 1, curF = file - 1;
+    if (curF - 2 >= 0 && curF >= xf && curR - 1 >= 0 && curR >= xr) {
+      curF -= 2;
+      curR -= 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+    curR = rank - 1, curF = file - 1;
+    if (curF - 2 >= 0 && curF >= xf && curR + 1 < 8 && curR <= xr) {
+      curF -= 2;
+      curR += 1;
+      if (curR == xr && curF == xf && chessBoard[curR][curF] == 0) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'w' &&
+          chessBoard[curR][curF] >= 17 && chessBoard[curR][curF] <= 32) {
+        return true;
+      }
+      if (curR == xr && curF == xf && setType == 'b' &&
+          chessBoard[curR][curF] >= 1 && chessBoard[curR][curF] <= 16) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+};    
 
 class pawn : public piece {
 public:
@@ -589,104 +722,136 @@ pawn P1w('a', 2, 'w', 9), P2w('b', 2, 'w', 10), P3w('c', 2, 'w', 11),
 void capture(int a, int b) {
   if (chessBoard[a][b] != 0) {
     switch (chessBoard[a][b]) {
-        case 1:
-            Kw.captured = true;
-            break;
-        case 2:
-            Qw.captured = true;
-            break;
-        case 3:
-            R1w.captured = true;
-            break;
-        case 4:
-            R2w.captured = true;
-            break;
-        case 5:
-            B1w.captured = true;
-            break;
-        case 6:
-            B2w.captured = true;
-            break;
-        case 7:
-            N1w.captured = true;
-            break;
-        case 8:
-            N2w.captured = true;
-            break;
-        case 9:
-            P1w.captured = true;
-            break;
-        case 10:
-            P2w.captured = true;
-            break;
-        case 11:
-            P3w.captured = true;
-            break;
-        case 12:
-            P4w.captured = true;
-            break;
-        case 13:
-            P5w.captured = true;
-            break;
-        case 14:
-            P6w.captured = true;
-            break;
-        case 15:
-            P7w.captured = true;
-            break;
-        case 16:
-            P8w.captured = true;
-            break;
-        case 17:
-            Kb.captured = true;
-            break;
-        case 18:
-            Qb.captured = true;
-            break;
-        case 19:
-            R1b.captured = true;
-            break;
-        case 20:
-            R2b.captured = true;
-            break;
-        case 21:
-            B1b.captured = true;
-            break;
-        case 22:
-            B2b.captured = true;
-            break;
-        case 23:
-            N1b.captured = true;
-            break;
-        case 24:
-            N2b.captured = true;
-            break;
-        case 25:
-            P1b.captured = true;
-            break;
-        case 26:
-            P2b.captured = true;
-            break;
-        case 27:
-            P3b.captured = true;
-            break;
-        case 28:
-            P4b.captured = true;
-            break;
-        case 29:
-            P5b.captured = true;
-            break;
-        case 30:
-            P6b.captured = true;
-            break;
-        case 31:
-            P7b.captured = true;
-            break;
-        case 32:
-            P8b.captured = true;
-            break;
-        default:
-            break;
+      case 1:
+        Kw.captured = true;
+        cout<<"\nCaptured Kw\n";
+        break;
+      case 2:
+        Qw.captured = true;
+        cout<<"\nCaptured Qw\n";
+        break;
+      case 3:
+        R1w.captured = true;
+        cout<<"\nCaptured R1w\n";
+        break;
+      case 4:
+        R2w.captured = true;
+        cout<<"\nCaptured R2w\n";
+        break;
+      case 5:
+        B1w.captured = true;
+        cout<<"\nCaptured B1w\n";
+        break;
+      case 6:
+        B2w.captured = true;
+        cout<<"\nCaptured B2w\n";
+        break;
+      case 7:
+        N1w.captured = true;
+        cout<<"\nCaptured N1w\n";
+        break;
+      case 8:
+        N2w.captured = true;
+        cout<<"\nCaptured N2w\n";
+        break;
+      case 9:
+        P1w.captured = true;
+        cout<<"\nCaptured P1w\n";
+        break;
+      case 10:
+        P2w.captured = true;
+        cout<<"\nCaptured P2w\n";
+        break;
+      case 11:
+        P3w.captured = true;
+        cout<<"\nCaptured P3w\n";
+        break;
+      case 12:
+        P4w.captured = true;
+        cout<<"\nCaptured P4w\n";
+        break;
+      case 13:
+        P5w.captured = true;
+        cout<<"\nCaptured P5w\n";
+        break;
+      case 14:
+        P6w.captured = true;
+        cout<<"\nCaptured P6w\n";
+        break;
+      case 15:
+        P7w.captured = true;
+        cout<<"\nCaptured P7w\n";
+        break;
+      case 16:
+        P8w.captured = true;
+        cout<<"\nCaptured P8w\n";
+        break;
+      case 17:
+        Kb.captured = true;
+        cout<<"\nCaptured Kb\n";
+        break;
+      case 18:
+        Qb.captured = true;
+        cout<<"\nCaptured Qb\n";
+        break;
+      case 19:
+        R1b.captured = true;
+        cout<<"\nCaptured R1b\n";
+        break;
+      case 20:
+        R2b.captured = true;
+        cout<<"\nCaptured R2b\n";
+        break;
+      case 21:
+        B1b.captured = true;
+        cout<<"\nCaptured B1b\n";
+        break;
+      case 22:
+        B2b.captured = true;
+        cout<<"\nCaptured B2b\n";
+        break;
+      case 23:
+        N1b.captured = true;
+        cout<<"\nCaptured N1b\n";
+        break;
+      case 24:
+        N2b.captured = true;
+        cout<<"\nCaptured N2b\n";
+        break;
+      case 25:
+        P1b.captured = true;
+        cout<<"\nCaptured P1b\n";
+        break;
+      case 26:
+        P2b.captured = true;
+        cout<<"\nCaptured P2b\n";
+        break;
+      case 27:
+        P3b.captured = true;
+        cout<<"\nCaptured P3b\n";
+        break;
+      case 28:
+        P4b.captured = true;
+        cout<<"\nCaptured P4b\n";
+        break;
+      case 29:
+        P5b.captured = true;
+        cout<<"\nCaptured P5b\n";
+        break;
+      case 30:
+        P6b.captured = true;
+        cout<<"\nCaptured P6b\n";
+        break;
+      case 31:
+        P7b.captured = true;
+        cout<<"\nCaptured P7b\n";
+        break;
+      case 32:
+        P8b.captured = true;
+        cout<<"\nCaptured P8b\n";
+        break;
+      default:
+        break;
     }
   }
 }
@@ -715,5 +880,12 @@ int main() {
   Qb.move('e',2);
   Qb.move('f',3);
   Qb.move('d',1);
+  N1b.move('a',6);
+  N1b.move('c',7);
+  N1b.move('c',5);
+  N1b.move('b',3);
+  N1b.move('c',1);
+  N2w.move('e',2);
+  N2w.move('c',1);
   return 0;
 }
